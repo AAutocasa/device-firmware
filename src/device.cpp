@@ -122,6 +122,8 @@ void sendHeartbeat() {
   serializeJson(heartbeatDoc, output);
 
   publish("status/heartbeat", output);
+
+  Serial.println(F("[device.cpp] [sendHeartbeat] Sent heartbeat info!"));
 }
 
 void setupDevice(const char *deviceID, const char *deviceType, const DeviceStatus deviceStatus) {
