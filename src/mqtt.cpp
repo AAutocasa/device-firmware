@@ -16,7 +16,7 @@ MQTTInfo mqtt_info;
 
 PubSubClient *client;
 
-std::map<String, Callback> callbacks;
+std::map<String, MQTTCallback> mqttCallbacks;
 
 void callback(char *topic, byte *payload, unsigned int length)
 {
@@ -30,7 +30,7 @@ void callback(char *topic, byte *payload, unsigned int length)
   Serial.println();
 
   String topicString = String(topic);
-  Callback callback = callbacks[topicString];
+  MQTTCallback callback = mqttCallbacks[topicString];
 
   if (callback)
   {
@@ -106,8 +106,12 @@ void loopMqtt()
   client->loop();
 }
 
-void subscribe(String topic, Callback callback)
+void subscribe(String topic, MQTTCallback callback)
 {
   client->subscribe(topic.c_str());
-  callbacks[topic] = callback;
+  mqttCallbacks[topic] = callback;
+}
+
+void publish(String topic, String message) {
+  client->publish(topic.c_str(), message.c_str());
 }
