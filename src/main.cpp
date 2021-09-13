@@ -7,7 +7,7 @@
 
 #define DEVICE_ID "ESP-test" 
 #define DEVICE_TYPE "ESP8266" 
-#define DEVICE_STARTING_STATUS 0 // 1 for active, 0 for inactive
+#define DEVICE_STARTING_STATUS Active
 
 void setup() {
   Serial.begin(9600);
